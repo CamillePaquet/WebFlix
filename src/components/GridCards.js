@@ -1,13 +1,17 @@
 import { Link } from "react-router-dom";
-import films from "../films.json";
+
 import Card from "./Card.js";
 
-function GridCards() {
+import useStyles from "./GridCard.style";
+
+function GridCards(props) {
+  const films = props.data;
+  const classes = useStyles();
   return (
     <div>
-      <ul>
+      <ul className={classes.root}>
         {films.movies.map((film) => (
-          <li key={film.id}>
+          <li className={classes.listElement} key={film.id}>
             <Link to={`/films/${film.id}`}>
               <Card
                 title={film.title}

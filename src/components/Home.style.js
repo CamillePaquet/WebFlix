@@ -2,12 +2,11 @@ import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles((theme) => ({
   root: {
-    display: "grid",
-    gridTemplateColumns: "repeat(3,1fr)",
+    display: "flex",
+    flexDirection: "column",
+    width: "40%",
+    margin: "auto",
     listStyle: "none",
-  },
-  listElement: {
-    margin: 0,
   },
 }));
 

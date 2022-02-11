@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
+import useStyles from "./BackButton.style";
 
 function BackButton() {
+  const classes = useStyles();
   return (
-    <input className="Back-button">
-      <Link to="/">Home</Link>
-    </input>
+    <Link className={classes.button} to="/">
+      Retour
+    </Link>
   );
 }
 

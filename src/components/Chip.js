@@ -1,4 +1,4 @@
-function Chips() {
+function Chips(props) {
   return null;
 }
 

@@ -1,5 +1,13 @@
+import InputSearch from "./InputSearch";
+import GridCards from "./GridCards";
+
 function Home() {
-  return null;
+  return (
+    <div>
+      <InputSearch></InputSearch>
+      <GridCards></GridCards>
+    </div>
+  );
 }
 
 export default Home;

@@ -2,6 +2,7 @@ import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 
 import "./App.css";
 import Home from "./components/Home.js";
+import Details from "./components/Details.js";
 
 function App() {
   return (
@@ -9,13 +10,12 @@ function App() {
       <header>
         <nav>
           <Link to="/">Home</Link>
-          <Link to="/about">À propos</Link>
-          <Link to="/users">Users</Link>
         </nav>
       </header>
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/films/:id" element={<Details />} />
         </Routes>
       </main>
     </BrowserRouter>

@@ -12,7 +12,7 @@ function Card(props) {
 
   return (
     <div className={classes.root}>
-      <Link to={`/films/${id}`}>
+      <Link className={classes.link} to={`/films/${id}`}>
         <img
           className={classes.img}
           src={`${urlImage}${image}`}

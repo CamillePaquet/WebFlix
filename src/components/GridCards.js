@@ -12,13 +12,11 @@ function GridCards(props) {
       <ul className={classes.root}>
         {films.movies.map((film) => (
           <li className={classes.listElement} key={film.id}>
-            <Link to={`/films/${film.id}`}>
-              <Card
-                title={film.title}
-                image={film.poster_path}
-                id={film.id}
-              ></Card>
-            </Link>
+            <Card
+              title={film.title}
+              image={film.poster_path}
+              id={film.id}
+            ></Card>
           </li>
         ))}
       </ul>

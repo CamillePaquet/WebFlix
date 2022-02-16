@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
 import films from "../films.json";
 import Chip from "./Chip";
 import Card from "./Card";
@@ -19,33 +18,27 @@ function Details() {
     (movie) => movie.id.toString() === id.toString()
   );
 
-  const [films_similar, setFilmsSimilar] = useState("");
-
-  useEffect(() => {
-    // componentDidMount and componentDidUpdate if deps
-
-    let similar = [];
-    film.genre_ids.map((film_genre) => {
-      similar = films.movies.filter((movie) =>
-        movie.genre_ids.includes(film_genre)
-      );
-    });
-
-    similar = similar.filter((movie) => movie.title != film.title);
-
-    setFilmsSimilar(
-      <div>
-        {similar.map((movie) => (
-          <Card
-            image={`${urlImage}${movie.poster_path}`}
-            title={movie.title}
-            id={movie.id}
-            key={movie.id}
-          ></Card>
-        ))}
-      </div>
+  let similar = [];
+  film.genre_ids.map((film_genre) => {
+    similar = films.movies.filter((movie) =>
+      movie.genre_ids.includes(film_genre)
     );
-  }, []);
+  });
+
+  similar = similar.filter((movie) => movie.title != film.title);
+  const films_similar = 
+    <div>
+      {similar.map((movie) => (
+        <Card
+          image={`${urlImage}${movie.poster_path}`}
+          title={movie.title}
+          id={movie.id}
+          key={movie.id}
+        ></Card>
+      ))}
+    </div>
+    
+
 
   return (
     <div>

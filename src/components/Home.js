@@ -5,13 +5,22 @@ import { useState } from "react";
 import useStyles from "./Home.style";
 
 function Home() {
-  const [value, setValue] = useState();
-  const onChange = (event) => setValue(event.target.value);
+  let filmsdup = structuredClone(films);
+
+  const [filmslist, setFilms] = useState(filmsdup);
+
+  const onAdd = (value) => {
+    filmsdup = structuredClone(films);
+    filmsdup.movies = filmsdup.movies.filter((film) => film.title.toLocaleUpperCase().includes(value))
+    setFilms(filmsdup);
+  };
+
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <InputSearch value={value} onChange={onChange}></InputSearch>
-      <GridCards data={films}></GridCards>
+      <InputSearch onAdd={onAdd}></InputSearch>
+
+      <GridCards data={filmslist}></GridCards>
     </div>
   );
 }

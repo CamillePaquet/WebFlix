@@ -1,16 +1,21 @@
 import useStyles from "./InputSearch.style";
-
+import { useState } from "react";
 function InputSearch(props) {
-  const onChange = props.onChange;
-  const value = props.value;
-  const classes = useStyles();
+
+  const [value, setValue] = useState("");
+  const onChange = (event) => {
+    setValue(event.target.value.toLocaleUpperCase());
+    props.onAdd(event.target.value.toLocaleUpperCase());
+  };
+
   return (
     <input
-      className={classes.inputSearch}
+      type="text"
       value={value}
       onChange={onChange}
-    ></input>
+    />
   );
+
 }
 
 export default InputSearch;

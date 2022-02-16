@@ -14,8 +14,6 @@ function Home() {
   
 
   const onAdd = (value) => {
-    console.log("cou")
-    console.log(value)
     filmsdup = structuredClone(films);
     filmsdup.movies = filmsdup.movies.filter((film) => film.title.toLocaleUpperCase().includes(value))
     setFilms(filmsdup);

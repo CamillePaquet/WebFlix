@@ -1,24 +1,26 @@
 import useStyles from "./InputSearch.style";
 import { useEffect, useState } from "react";
-import { useSearchParams,useHistory } from "react-router-dom";
-function InputSearch(props,ref) {
+import { useSearchParams, useParams } from "react-router-dom";
+function InputSearch(props,navigation) {
   const [params] = useSearchParams();
   const [value, setValue] = useState("");
 
   useEffect(() => {
-    if (params.get('title')) {
+    if (params.has('title')) {
       setValue(params.get('title').toLocaleUpperCase());
     }
   }, [params])
   
   useEffect(() => {
     props.onAdd(value.toLocaleUpperCase());
-    
   }, [value])
+
 
 
   const onChange = (event) => {
     setValue(event.target.value.toLocaleUpperCase());
+    
+
   };
 
   return (

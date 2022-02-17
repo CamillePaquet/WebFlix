@@ -1,12 +1,12 @@
 import { useParams, Navigate } from "react-router-dom";
 import films from "../films.json";
 import Chip from "./Chip";
-import Card from "./Card";
+import SimilarFilms from "./SimilarFilms";
 import BackButton from "./BackButton";
 import useStyles from "./Details.style";
 import Rating from "./Rating";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from "react-responsive-carousel";
+
 
 function Details() {
   const params = useParams();
@@ -27,18 +27,9 @@ function Details() {
     );
   });
 
-  similar = similar.filter((movie) => movie.title != film.title);
-  const films_similar = 
-    <div>
-      {similar.map((movie) => (
-        <Card
-          image={`${urlImage}${movie.poster_path}`}
-          title={movie.title}
-          id={movie.id}
-          key={movie.id}
-        ></Card>
-      ))}
-    </div>
+  const films_similar = similar.filter((movie) => movie.title != film.title);
+
+    
     
 
 
@@ -73,7 +64,7 @@ function Details() {
         </div>
         <div>
           <h3>Contenu similaire : </h3>
-          {films_similar}
+          <SimilarFilms similar={films_similar}/>
         </div>
       </div>
     </div>

@@ -38,9 +38,6 @@ const useStyles = createUseStyles((theme) => ({
   notesContainer: {
     gridColumn: "1 / 3",
   },
-  caroussel: {
-    width: "150px",
-  },
 }));
 
 export default useStyles;

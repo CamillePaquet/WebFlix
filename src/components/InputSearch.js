@@ -20,7 +20,7 @@ function InputSearch(props) {
 
   const onChange = (event) => {
     setValue(event.target.value.toLocaleUpperCase());
-    setSearchParams({ title: event.target.value });
+    setSearchParams(event.target.value ? { title: event.target.value } : {});
   };
 
   return (

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import films from "../films.json";
 import Chip from "./Chip";
 import Card from "./Card";
@@ -17,6 +17,8 @@ function Details() {
   const film = films.movies.find(
     (movie) => movie.id.toString() === id.toString()
   );
+
+  if (!film) return <Navigate to="/" replace={true} />;
 
   let similar = [];
   film.genre_ids.map((film_genre) => {

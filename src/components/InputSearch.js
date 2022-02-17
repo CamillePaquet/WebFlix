@@ -1,5 +1,5 @@
 import useStyles from "./InputSearch.style";
-import { useEffect, useState } from "react";
+import { useEffect, useState,useCallback } from "react";
 import { useSearchParams, useParams } from "react-router-dom";
 
 function InputSearch(props) {
@@ -15,13 +15,12 @@ function InputSearch(props) {
   
   useEffect(() => {
     props.onAdd(value.toLocaleUpperCase());
-    
   }, [value])
 
-  const onChange = (event) => {
+  const onChange = useCallback((event) => {
     setValue(event.target.value.toLocaleUpperCase());
     setSearchParams(event.target.value ? { title: event.target.value } : {});
-  };
+  }, [setSearchParams]);
 
   return (
     <input className={classes.inputSearch}

@@ -28,8 +28,6 @@ function Details() {
   });
 
   const films_similar = similar.filter((movie) => movie.title != film.title);
-
-    
     
 
 

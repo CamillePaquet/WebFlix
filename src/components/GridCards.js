@@ -10,7 +10,7 @@ function GridCards(props) {
   return (
     <div>
       <ul className={classes.root}>
-        {films.movies.map((film) => (
+        {films.map((film) => (
           <li className={classes.listElement} key={film.id}>
             <Card
               title={film.title}

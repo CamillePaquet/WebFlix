@@ -2,6 +2,7 @@ import starpleine from "../assets/star.png";
 import starvide from "../assets/stars_vide.png";
 import useStyles from "./Rating.style";
 function Rating(props) {
+  
   const note = props.note;
   const classes = useStyles();
   const number_stars = Math.floor(note / 2);
@@ -22,11 +23,7 @@ function Rating(props) {
       </li>
     );
   }
-  // {stars_vides.each((star, idx) => (
-  //   <li key={idx + 20}>
-  //     <img src="../public/assets/stars_vide.png"></img>
-  //   </li>
-  // ))}
+
   return (
     <ul className={classes.listRating}>
       {stars_pleines}

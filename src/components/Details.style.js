@@ -5,10 +5,13 @@ const useStyles = createUseStyles((theme) => ({
     textAlign: "right",
     marginRight: 20,
   },
+  container: {
+    margin: "0 10%",
+  },
   detailsContainer: {
-    display: "grid",
-    gridTemplateColumns: "repeat(2, 1fr)",
-    margin: "4em 10em",
+    display: "flex",
+    justifyContent: "space-around",
+
   },
   afficheContainer: {
     textAlign: "center",
@@ -20,7 +23,8 @@ const useStyles = createUseStyles((theme) => ({
     justifyContent: "center",
   },
   img: {
-    width: 300,
+    width: "200px",
+    height: "auto"
   },
   listChip: {
     display: "flex",
@@ -32,12 +36,9 @@ const useStyles = createUseStyles((theme) => ({
     margin: "0 2px",
   },
   resumeFilm: {
-    gridColumn: "1 / 3",
-    gridRow: "2",
+    textAlign: "center"
   },
-  notesContainer: {
-    gridColumn: "1 / 3",
-  },
+
 }));
 
 export default useStyles;

@@ -5,7 +5,6 @@ import {  useState } from "react";
 import useStyles from "./Home.style";
 import { useQuery } from "react-query";
 
-
 function buildUrl(value) {
 
   return value.length > 0

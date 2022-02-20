@@ -3,7 +3,8 @@ import { createUseStyles } from "react-jss";
 const useStyles = createUseStyles((theme) => ({
   similarList: {
     display: "flex",
-    overflow:"scroll"
+    overflow: "scroll",
+ 
   }
 }));
 

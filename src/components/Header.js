@@ -5,6 +5,7 @@ import useStyles from "./Header.style";
 
 function Header(props) {
   const classes = useStyles();
+  const favorites = useSelector((state) => state.favorites);
  
   return (
     <header className={classes.root}>
@@ -12,7 +13,7 @@ function Header(props) {
         <h1 className={classes.title}>Webflix</h1>
       </Link>
       <Link className={classes.link} to="/favorites">
-          {`Favorites (${props.favorites.length})`}
+          {`Favorites (${favorites.length})`}
       </Link>
     </header>
   );

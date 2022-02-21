@@ -1,6 +1,5 @@
 import InputSearch from "./InputSearch";
 import GridCards from "./GridCards";
-import films from "../films.json";
 import {  useState } from "react";
 import useStyles from "./Home.style";
 import { useQuery } from "react-query";
@@ -31,7 +30,7 @@ function Home(props) {
       {error && <div className={classes.error}>{error}</div>}
       {(isLoading || isFetching) && <div>Loading movies...</div>}
       {!isLoading && !error && (
-        <GridCards data={data?.results} addToFavorite={props.addToFavorite} favorites={props.favorites}></GridCards>
+        <GridCards data={data?.results}></GridCards>
         )}
     </div>
   );

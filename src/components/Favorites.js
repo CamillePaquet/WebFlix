@@ -1,11 +1,14 @@
 import GridCards from "./GridCards.js";
-
-
+import { useDispatch, useSelector } from "react-redux";
+import { favoritesSlice } from "../slices";
 
 
 function Favorites(props) {
 
-  const films = props.favorites;
+  const films = useSelector((state) => state.favorites);
+
+  // console.log(films)
+
 
   return (
     <div>

@@ -20,23 +20,7 @@ function Details(props) {
   const { data, isLoading, isFetching, error } = useQuery(["movie", id], () =>
     fetch(buildUrl(id)).then((response) => response.json()),
   );
-
-  // const film = films.movies.find(
-  //   (movie) => movie.id.toString() === id.toString()
-  // );;
- 
-  // if (!film) return <Navigate to="/" replace={true} />;
-
-  // let similar = [];
-  // film.genre_ids.map((film_genre) => {
-  //   similar = films.movies.filter((movie) =>
-  //     movie.genre_ids.includes(film_genre)
-  //   );
-  // });
-
-  // const films_similar = similar.filter((movie) => movie.title != film.title);
     
-console.log(id)
 
   return (
     
@@ -77,7 +61,7 @@ console.log(id)
           </div>
           <div>
             <h3>Contenu similaire : </h3>
-            <SimilarFilms film={data} addToFavorite={props.addToFavorite} favorites={props.favorites}/>
+            <SimilarFilms film={data}/>
           </div>
           </div>
         </div>

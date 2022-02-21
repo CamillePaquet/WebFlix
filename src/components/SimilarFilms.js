@@ -41,8 +41,6 @@ function SimilarFilms(props) {
               key = {film.id+Math.random()}
               image={`${urlImage}${movie.poster_path}`}
               film={movie}
-              addToFavorite={props.addToFavorite}
-              favorites={props.favorites}
             ></Card>
           ))
         

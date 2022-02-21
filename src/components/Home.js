@@ -12,7 +12,7 @@ function buildUrl(value) {
     : `${process.env.REACT_APP_API_URL}/movie/popular?api_key=${process.env.REACT_APP_API_KEY}`;
 }
 
-function Home() {
+function Home(props) {
   
   const [paramsValue, setParamValue] = useState("");
 
@@ -31,7 +31,7 @@ function Home() {
       {error && <div className={classes.error}>{error}</div>}
       {(isLoading || isFetching) && <div>Loading movies...</div>}
       {!isLoading && !error && (
-        <GridCards data={data?.results}></GridCards>
+        <GridCards data={data?.results} addToFavorite={props.addToFavorite} favorites={props.favorites}></GridCards>
         )}
     </div>
   );

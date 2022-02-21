@@ -1,5 +1,4 @@
-import { useParams, Navigate } from "react-router-dom";
-import films from "../films.json";
+import { useParams } from "react-router-dom";
 import Chip from "./Chip";
 import SimilarFilms from "./SimilarFilms";
 import BackButton from "./BackButton";
@@ -12,7 +11,7 @@ function buildUrl(id) {
   return `${process.env.REACT_APP_API_URL}/movie/${id}?api_key=${process.env.REACT_APP_API_KEY}`;
 }
 
-function Details() {
+function Details(props) {
   const params = useParams();
   const classes = useStyles();
   const id = params.id;
@@ -78,7 +77,7 @@ console.log(id)
           </div>
           <div>
             <h3>Contenu similaire : </h3>
-            <SimilarFilms film={data} />
+            <SimilarFilms film={data} addToFavorite={props.addToFavorite} favorites={props.favorites}/>
           </div>
           </div>
         </div>

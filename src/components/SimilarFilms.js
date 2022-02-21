@@ -25,9 +25,9 @@ function SimilarFilms(props) {
       similars = data.results.filter((movie) =>
         movie.genre_ids.includes(genre.id)
       );
-      similars.map((film) => !films_similar.includes(film) ?films_similar.push(film) : null);
+      similars.map((film) => !films_similar.includes(film) ? films_similar.push(film) : null);
     });
-    sim = films_similar.filter((movie) => movie.title != film.title)
+    sim = films_similar.filter((movie) => movie.title !== film.title)
   };
 
 
@@ -38,10 +38,11 @@ function SimilarFilms(props) {
       {!isLoading && !error && (
           sim.map((movie) => (
             <Card
+              key = {film.id+Math.random()}
               image={`${urlImage}${movie.poster_path}`}
-              title={movie.title}
-              id={movie.id}
-              key={movie.id}
+              film={movie}
+              addToFavorite={props.addToFavorite}
+              favorites={props.favorites}
             ></Card>
           ))
         

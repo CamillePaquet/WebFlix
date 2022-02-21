@@ -13,9 +13,9 @@ function GridCards(props) {
         {films.map((film) => (
           <li className={classes.listElement} key={film.id}>
             <Card
-              title={film.title}
-              image={film.poster_path}
-              id={film.id}
+              film={film}
+              addToFavorite={props.addToFavorite}
+              favorites={props.favorites}
             ></Card>
           </li>
         ))}

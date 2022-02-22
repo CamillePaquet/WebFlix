@@ -1,23 +1,21 @@
 import InputSearch from "./InputSearch";
 import GridCards from "./GridCards";
-import {  useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import useStyles from "./Home.style";
-import { useQuery } from "react-query";
 
-function buildUrl(value) {
 
-  return value.length > 0
-    ? `${process.env.REACT_APP_API_URL}/search/movie?query=${value}&api_key=${process.env.REACT_APP_API_KEY}`
-    : `${process.env.REACT_APP_API_URL}/movie/popular?api_key=${process.env.REACT_APP_API_KEY}`;
-}
 
 function Home(props) {
   
   const [paramsValue, setParamValue] = useState("");
 
-  const { data, isLoading, isFetching, error } = useQuery(["movies", paramsValue], () =>
-    fetch(buildUrl(paramsValue)).then((response) => response.json())
-  );
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({ type: "FETCH_MOVIES" });
+  }, [dispatch]);
+
+  const movies = useSelector((state) => state.movies);
   
   const onAdd = (value) => {
     setParamValue(value);
@@ -27,11 +25,7 @@ function Home(props) {
   return (
     <div className={classes.root}>
       <InputSearch onAdd={onAdd}></InputSearch>
-      {error && <div className={classes.error}>{error}</div>}
-      {(isLoading || isFetching) && <div>Loading movies...</div>}
-      {!isLoading && !error && (
-        <GridCards data={data?.results}></GridCards>
-        )}
+      <GridCards data={movies}></GridCards>
     </div>
   );
 }

@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
+import createSagaMiddleware from "redux-saga";
+
 import {
   persistStore,
   persistReducer,
@@ -16,7 +17,8 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import { favoritesSlice } from "./slices";
+import { favoritesSlice, moviesSlice } from "./slices";
+import { rootSaga } from "./sagas";
 
 import useStyles from "./App.style";
 
@@ -34,23 +36,26 @@ const persistedReducer = persistReducer(
   persistConfig,
   combineReducers({
     favorites: favoritesSlice.reducer,
+    movies: moviesSlice.reducer,
   })
 );
-
+const sagaMiddleware = createSagaMiddleware();
 const store = configureStore({
   reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
+  middleware: (getDefaultMiddleware) => [
+    ...getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
+    sagaMiddleware,
+  ],
 });
 
+
+sagaMiddleware.run(rootSaga)
+
 const persistor = persistStore(store);
-
-const queryClient = new QueryClient();
-
 function App() {
   const classes = useStyles();
   
@@ -58,7 +63,6 @@ function App() {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor} loading={null}>
-        <QueryClientProvider client={queryClient}>
           <BrowserRouter >
             <Header  />
             <main className={classes.root}>
@@ -69,7 +73,6 @@ function App() {
               </Routes>
             </main>
           </BrowserRouter>
-        </QueryClientProvider>
       </PersistGate>
     </Provider>
   );

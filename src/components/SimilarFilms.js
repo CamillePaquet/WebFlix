@@ -1,11 +1,8 @@
 
 import Card from "./Card"
 import useStyles from "./SimilarFilms.style";
-import { useQuery } from "react-query";
+import { useDispatch, useSelector } from "react-redux";
 
-function buildUrl() {
-  return  `${process.env.REACT_APP_API_URL}/movie/popular?api_key=${process.env.REACT_APP_API_KEY}`;
-}
 
 function SimilarFilms(props) {
   const film = props.film;
@@ -13,29 +10,26 @@ function SimilarFilms(props) {
   const classes = useStyles();
   const urlImage = "https://image.tmdb.org/t/p/w500/";
 
-  const { data, isLoading, isFetching, error } = useQuery(["movie",film], () =>
-    fetch(buildUrl()).then((response) => response.json())
-  );
+  const movies = useSelector((state) => state.movies);
+
 
   let similars = [];
   let films_similar = [];
   let sim = [];
-  if (!isLoading && !error) {
-    film.genres.map((genre) => {
-      similars = data.results.filter((movie) =>
-        movie.genre_ids.includes(genre.id)
+  
+    film.genre_ids.map((genre) => {
+      similars = movies.filter((movie) =>
+        movie.genre_ids.includes(genre)
       );
       similars.map((film) => !films_similar.includes(film) ? films_similar.push(film) : null);
     });
     sim = films_similar.filter((movie) => movie.title !== film.title)
-  };
+
 
 
   return (
     <div className={classes.similarList}>
-      {error && <div className={classes.error}>{error}</div>}
-      {(isLoading || isFetching) && <div>Loading movies...</div>}
-      {!isLoading && !error && (
+      {
           sim.map((movie) => (
             <Card
               key = {film.id+Math.random()}
@@ -44,7 +38,7 @@ function SimilarFilms(props) {
             ></Card>
           ))
         
-      )}
+      }
     </div>
   );
 }

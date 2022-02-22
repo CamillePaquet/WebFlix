@@ -4,12 +4,11 @@ import SimilarFilms from "./SimilarFilms";
 import BackButton from "./BackButton";
 import useStyles from "./Details.style";
 import Rating from "./Rating";
-import { useQuery } from "react-query";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
-function buildUrl(id) {
-  return `${process.env.REACT_APP_API_URL}/movie/${id}?api_key=${process.env.REACT_APP_API_KEY}`;
-}
+import { useDispatch, useSelector } from "react-redux";
+
+
+
 
 function Details(props) {
   const params = useParams();
@@ -17,11 +16,12 @@ function Details(props) {
   const id = params.id;
   const urlImage = "https://image.tmdb.org/t/p/w500/";
 
-  const { data, isLoading, isFetching, error } = useQuery(["movie", id], () =>
-    fetch(buildUrl(id)).then((response) => response.json()),
-  );
+ 
     
-
+  const movies = useSelector((state) => state.movies);
+  const data = movies.filter((movie) => movie.id == id)[0]
+  
+  console.log(data)
   return (
     
     <div>
@@ -29,9 +29,7 @@ function Details(props) {
       <div className={classes.buttonContainer}>
         <BackButton> </BackButton>
       </div>
-      {error && <div className={classes.error}><div> Error</div></div>}
-      {(isLoading || isFetching) && <div>Loading movies...</div>}
-      {!isLoading && !error && (
+
       <div className={classes.container}>
         <div className={classes.detailsContainer}>
           <div className={classes.afficheContainer}>
@@ -45,11 +43,11 @@ function Details(props) {
             <h1>{data.title}</h1>
             <span> Sorti le {data.release_date}</span>
             <ul className={classes.listChip}>
-              {data.genres.map((genre) => (
-                <li className={classes.elementChip} key={genre.id}>
-                  <Chip genre={genre}></Chip>
-                </li>
-              ))}
+            {data.genre_ids.map((genre_id) => (
+              <li className={classes.elementChip} key={genre_id}>
+                <Chip id={genre_id}></Chip>
+              </li>
+            ))}
             </ul>
           </div>
         </div>
@@ -65,7 +63,7 @@ function Details(props) {
           </div>
           </div>
         </div>
-      )}
+
     </div>
   );
 }
